@@ -16,13 +16,13 @@ load_dotenv()
 
 app = Flask(__name__)
 #создать файл env и задать значения ключа в переменную SECRET_KEY
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
 # при создании второй таблицы в базе данных не нужно повторять строки ниже
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()
